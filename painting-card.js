@@ -404,7 +404,9 @@ class PaintingCard extends HTMLElement {
     }
     let drops = '';
     for (let i = 0; i < 140; i++) {
-      drops += `<line class="drop" x1="${r() * 1700}" y1="${r() * 1000 - 1000}" x2="${r() * 1700 - 12}" y2="0" style="animation-delay:${(-r() * 2).toFixed(2)}s"/>`;
+      // Kurze Striche mit derselben Neigung wie die Fallbewegung, verteilt über eine Bildhöhe oberhalb
+      const x = r() * 1750, y = r() * 1100 - 1100, len = 28 + r() * 40;
+      drops += `<line class="drop" x1="${x.toFixed(0)}" y1="${y.toFixed(0)}" x2="${(x - len * 0.03).toFixed(1)}" y2="${(y + len).toFixed(0)}" opacity="${(0.25 + r() * 0.3).toFixed(2)}" style="animation-delay:${(-r() * 2).toFixed(2)}s"/>`;
     }
     // house: Name eines eigenen Hauses oder Einstellungen fürs allgemeine Haus
     const spec = this.config.house;
@@ -446,8 +448,8 @@ class PaintingCard extends HTMLElement {
   .win, .glow { cursor:pointer; }
   .glow { opacity:0; transition:opacity 1.2s ease; pointer-events:none; }
   .glow.on { opacity:1; }
-  .drop { stroke:#cfd8e0; stroke-width:2; opacity:.55; animation: fall 1.1s linear infinite; }
-  .snow .drop { stroke-width:6; stroke-linecap:round; animation-duration:7s; }
+  .drop { stroke:#cfd8e0; stroke-width:1.6; stroke-linecap:round; animation: fall 1.1s linear infinite; }
+  .snow .drop { stroke-width:6; stroke-dasharray:0.1 200; animation-duration:7s; }
   @keyframes fall { to { transform: translate(-30px, 1100px); } }
   .puff { transform-box: fill-box; transform-origin:center; animation: rise 9s ease-out infinite; opacity:0; }
   @keyframes rise { 0% { opacity:0; transform: translate(0,0) scale(.6);} 15% { opacity:.55; } 100% { opacity:0; transform: translate(-90px,-260px) scale(3.4);} }
