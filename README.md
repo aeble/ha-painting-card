@@ -101,7 +101,9 @@ All texts live in `i18n/<language>.json`, one file per language, keyed by short 
 
 ## Installation
 
-Open HACS, search for `painting-card` and download it. HACS adds the dashboard resource itself; reload the browser afterwards.
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=aeble&repository=ha-painting-card&category=plugin)
+
+Or open HACS, search for `painting-card` and download it. HACS adds the dashboard resource itself; reload the browser afterwards.
 
 By hand: copy `painting-card.js` to `/config/www/` and add `/local/painting-card.js` as a JavaScript module under Settings → Dashboards → Resources.
 
@@ -229,7 +231,9 @@ Personen kommen automatisch aus allen `person.*`-Entitäten, schwache Batterien 
 
 #### Einbau
 
-HACS öffnen, nach `painting-card` suchen und herunterladen. HACS trägt die Dashboard-Ressource selbst ein; danach den Browser neu laden.
+[![Open in HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=aeble&repository=ha-painting-card&category=plugin)
+
+Oder HACS öffnen, nach `painting-card` suchen und herunterladen. HACS trägt die Dashboard-Ressource selbst ein; danach den Browser neu laden.
 
 Von Hand: `painting-card.js` nach `/config/www/` kopieren und unter Einstellungen → Dashboards → Ressourcen als JavaScript-Modul `/local/painting-card.js` eintragen.
 
