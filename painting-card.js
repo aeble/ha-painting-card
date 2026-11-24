@@ -26,7 +26,7 @@ const tx = (key, vars = {}) => {
 
 
 
-const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 const num = (hass, id) => {
   const s = id && hass.states[id];
@@ -492,7 +492,7 @@ class PaintingCard extends HTMLElement {
     const houseSvg = H.body({ r, windows });
     const glows = lit.map(([p, id]) => {
       const b = bbox(p);
-      return `<g class="glow" data-entity="${id}">
+      return `<g class="glow" data-entity="${esc(id)}">
         <ellipse cx="${b.x + b.w / 2}" cy="${b.y + b.h / 2}" rx="${b.w * 1.4 + 30}" ry="${b.h * 1.1 + 20}" fill="url(#glowGrad)"/>
         <polygon points="${pts(p)}" fill="url(#lampGrad)"/>
         <polygon points="${pts(p)}" fill="none" stroke="#f1ece4" stroke-width="7"/>
@@ -608,7 +608,7 @@ class PaintingCard extends HTMLElement {
     <rect width="1600" height="1000" filter="url(#canvas)" opacity=".35" style="mix-blend-mode:multiply" pointer-events="none"/>
     <rect width="1600" height="1000" fill="url(#vignette)" pointer-events="none"/>
     ${this.config.signature === false ? '' : '<text x="1480" y="930" text-anchor="end" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="34" fill="#2b1d10" fill-opacity=".75" pointer-events="none">A. Eble</text>'}
-    <g id="hit" transform="${H.transform}">${lit.map(([p, id]) => `<polygon points="${pts(p)}" fill="transparent" stroke="transparent" stroke-width="24" data-entity="${id}" style="cursor:pointer"><title>${esc(lightName(id))}</title></polygon>`).join('')}
+    <g id="hit" transform="${H.transform}">${lit.map(([p, id]) => `<polygon points="${pts(p)}" fill="transparent" stroke="transparent" stroke-width="24" data-entity="${esc(id)}" style="cursor:pointer"><title>${esc(lightName(id))}</title></polygon>`).join('')}
     </g>
   </svg>
   </div></div>
@@ -786,7 +786,7 @@ HOUSES.generic = (p = {}) => {
   const chimney = p.chimney ?? 'right';
   const cellar = Boolean(p.cellar);
   const plinth = cellar ? 62 : 30;
-  const wall = p.wall || '#e39a6c', roof = p.roof || '#463a36';
+  const wall = esc(p.wall || '#e39a6c'), roof = esc(p.roof || '#463a36');
 
   // Maße in einem eigenen Raster, Bodenlinie bei y = 870, Mitte bei x = 880; zu große Häuser werden verkleinert
   const ground = 870, cx = 880, story = 170, pitch = 128, margin = 70;
